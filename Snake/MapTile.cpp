@@ -42,7 +42,6 @@ namespace Snake
 
 	void DrawMapTile(MapTile& mapTile, sf::RenderWindow& window)
 	{
-		//возможно надо сделать отрисовку целиком карты всей здесь
 		mapTile.sprite.setPosition(mapTile.position2D.x, mapTile.position2D.y);
 		window.draw(mapTile.sprite);
 	}

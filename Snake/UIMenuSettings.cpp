@@ -1,5 +1,4 @@
 #include "UIMenu.h"
-//#include "UIMenuTableRecords.h"
 #include "Game.h"
 #include <string>
 
@@ -7,7 +6,8 @@ namespace Snake
 {
 	void PlayBackgroundSound(Game& game)
 	{
-		if (game.uiMenu.uiMenuSettings.backgroundSound.getStatus() == sf::Sound::Status::Stopped)
+		if ((game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed & UIMenuSettingsPressedEnum::IsMusicPressed) && 
+			(game.uiMenu.uiMenuSettings.backgroundSound.getStatus() == sf::Sound::Status::Stopped))
 		{
 			game.uiMenu.uiMenuSettings.backgroundSound.play();
 		}
@@ -15,7 +15,8 @@ namespace Snake
 	
 	void PlayInputEnterMenuSound(Game& game)
 	{
-		if (game.uiMenu.uiMenuSettings.inputEnterMenuSound.getStatus() == sf::Sound::Status::Stopped)
+		if ((game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed & UIMenuSettingsPressedEnum::IsSoundEffectsPressed) &&
+			(game.uiMenu.uiMenuSettings.inputEnterMenuSound.getStatus() == sf::Sound::Status::Stopped))
 		{
 			game.uiMenu.uiMenuSettings.inputEnterMenuSound.play();
 		}
@@ -23,7 +24,8 @@ namespace Snake
 	
 	void PlayDeathSound(Game& game)
 	{
-		if (game.uiMenu.uiMenuSettings.deathSound.getStatus() == sf::Sound::Status::Stopped)
+		if ((game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed & UIMenuSettingsPressedEnum::IsSoundEffectsPressed) &&
+			(game.uiMenu.uiMenuSettings.deathSound.getStatus() == sf::Sound::Status::Stopped))
 		{
 			game.uiMenu.uiMenuSettings.deathSound.play();
 		}
@@ -31,7 +33,8 @@ namespace Snake
 	
 	void PlayAppleEatenSound(Game& game)
 	{
-		if (game.uiMenu.uiMenuSettings.appleEatenSound.getStatus() == sf::Sound::Status::Stopped)
+		if ((game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed & UIMenuSettingsPressedEnum::IsSoundEffectsPressed) &&
+			(game.uiMenu.uiMenuSettings.appleEatenSound.getStatus() == sf::Sound::Status::Stopped))
 		{
 			game.uiMenu.uiMenuSettings.appleEatenSound.play();
 		}
@@ -39,7 +42,8 @@ namespace Snake
 	
 	void PlayInputMoveMenuSound(Game& game)
 	{
-		if (game.uiMenu.uiMenuSettings.inputMoveMenuSound.getStatus() == sf::Sound::Status::Stopped)
+		if ((game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed & UIMenuSettingsPressedEnum::IsSoundEffectsPressed) &&
+			(game.uiMenu.uiMenuSettings.inputMoveMenuSound.getStatus() == sf::Sound::Status::Stopped))
 		{
 			game.uiMenu.uiMenuSettings.inputMoveMenuSound.play();
 		}
@@ -66,7 +70,7 @@ namespace Snake
 				if (game.uiMenu.uiMenuSettings.statusSoundEffectsText.getString() == "ON")
 				{
 					game.uiMenu.uiMenuSettings.statusSoundEffectsText.setString("OFF");
-					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(UIMenuSettingsPressedEnum::IsSoundEffectsPressed);
+					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(/*1 << */UIMenuSettingsPressedEnum::IsSoundEffectsPressed);
 				}
 				else if (game.uiMenu.uiMenuSettings.statusSoundEffectsText.getString() == "OFF")
 				{
@@ -79,7 +83,7 @@ namespace Snake
 				if (game.uiMenu.uiMenuSettings.statusMusicText.getString() == "ON")
 				{
 					game.uiMenu.uiMenuSettings.statusMusicText.setString("OFF");
-					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(UIMenuSettingsPressedEnum::IsMusicPressed);
+					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(/*1 << */UIMenuSettingsPressedEnum::IsMusicPressed);
 				}
 				else if (game.uiMenu.uiMenuSettings.statusMusicText.getString() == "OFF")
 				{

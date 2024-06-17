@@ -21,7 +21,7 @@ namespace Snake
 	struct UIMenuSettings
 	{
 		char selectedMenuSettingsItem = UIMenuSettingsEnum::IsSoundEffects;
-		char selectedMenuSettingsItemPressed = 0;
+		char selectedMenuSettingsItemPressed = (UIMenuSettingsPressedEnum::IsSoundEffectsPressed) | (UIMenuSettingsPressedEnum::IsMusicPressed);
 
 		sf::Text nameSettingsText;
 

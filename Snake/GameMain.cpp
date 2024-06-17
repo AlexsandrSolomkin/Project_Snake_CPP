@@ -16,10 +16,6 @@ int main()
     Game game;
     InitGame(game);
     DeserializeGame(game);
-    //мнбне бнглнфмн ньхайю!!!
-    //////////////////////////////////////////////////////////
-    //InitUIMenuSettings(game.uiMenu.uiMenuSettings, game.font);
-    //////////////////////////////////////////////////////////
     sf::Clock gameClock;
     float lastTime = gameClock.getElapsedTime().asSeconds();
 

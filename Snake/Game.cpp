@@ -10,8 +10,6 @@ namespace Snake
 		InitMapTiles(game);
 		InitApple(game.apple, game);
 		InitSnakeTile(game);
-
-		//DeserializeGame(game);
 	}
 
 	void InitGame(Game& game)
