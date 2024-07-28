@@ -60,6 +60,15 @@ namespace Snake
 			text.setFillColor(sf::Color::White);
 		}
 	}
+
+	void CheckColorUIMenuSettingsAllItem(UIMenuSettings& uiMenuSettings)
+	{
+		CheckColorUIMenuSettingsItem(uiMenuSettings.buttonSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
+		CheckColorUIMenuSettingsItem(uiMenuSettings.statusSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
+		CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
+		CheckColorUIMenuSettingsItem(uiMenuSettings.statusMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
+		CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMainMenuText, uiMenuSettings, UIMenuSettingsEnum::IsMainMenuS);
+	}
 	
 	void CheckEnterPressedUIMenuTablePlayerResultItem(UIMenuSettings& uiMenuSettings, struct Game& game)
 	{
@@ -70,7 +79,7 @@ namespace Snake
 				if (game.uiMenu.uiMenuSettings.statusSoundEffectsText.getString() == "ON")
 				{
 					game.uiMenu.uiMenuSettings.statusSoundEffectsText.setString("OFF");
-					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(/*1 << */UIMenuSettingsPressedEnum::IsSoundEffectsPressed);
+					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(UIMenuSettingsPressedEnum::IsSoundEffectsPressed);
 				}
 				else if (game.uiMenu.uiMenuSettings.statusSoundEffectsText.getString() == "OFF")
 				{
@@ -83,7 +92,7 @@ namespace Snake
 				if (game.uiMenu.uiMenuSettings.statusMusicText.getString() == "ON")
 				{
 					game.uiMenu.uiMenuSettings.statusMusicText.setString("OFF");
-					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(/*1 << */UIMenuSettingsPressedEnum::IsMusicPressed);
+					game.uiMenu.uiMenuSettings.selectedMenuSettingsItemPressed &= ~(UIMenuSettingsPressedEnum::IsMusicPressed);
 				}
 				else if (game.uiMenu.uiMenuSettings.statusMusicText.getString() == "OFF")
 				{
@@ -93,13 +102,11 @@ namespace Snake
 			}
 			else if (uiMenuSettings.selectedMenuSettingsItem & UIMenuSettingsEnum::IsMainMenuS)
 			{
-				game.uiMenu.selectedMenuItem = 0;
-				game.uiMenu.selectedMenuItem |= UIMenuEnum::IsGameStart;
 				game.uiMenu.selectedMenuItemPressed = 0;
 			}
 
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -159,32 +166,20 @@ namespace Snake
 		{
 			uiMenuSettings.selectedMenuSettingsItem *= 2;
 
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
-			CheckColorUIMenuSettingsItem(uiMenuSettings.statusSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
-			//uiMenuSettings.statusSoundEffectsText.setColor(uiMenuSettings.buttonSoundEffectsText.getColor());
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
-			CheckColorUIMenuSettingsItem(uiMenuSettings.statusMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
-			//uiMenuSettings.statusMusicText.setColor(uiMenuSettings.buttonMusicText.getColor());
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMainMenuText, uiMenuSettings, UIMenuSettingsEnum::IsMainMenuS);
+			CheckColorUIMenuSettingsAllItem(uiMenuSettings);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 		else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 				(uiMenuSettings.selectedMenuSettingsItem != UIMenuSettingsEnum::IsSoundEffects))
 		{
 			uiMenuSettings.selectedMenuSettingsItem /= 2;
 
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
-			CheckColorUIMenuSettingsItem(uiMenuSettings.statusSoundEffectsText, uiMenuSettings, UIMenuSettingsEnum::IsSoundEffects);
-			//uiMenuSettings.statusSoundEffectsText.setColor(uiMenuSettings.buttonSoundEffectsText.getColor());
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
-			CheckColorUIMenuSettingsItem(uiMenuSettings.statusMusicText, uiMenuSettings, UIMenuSettingsEnum::IsMusic);
-			//uiMenuSettings.statusMusicText.setColor(uiMenuSettings.buttonMusicText.getColor());
-			CheckColorUIMenuSettingsItem(uiMenuSettings.buttonMainMenuText, uiMenuSettings, UIMenuSettingsEnum::IsMainMenuS);
+			CheckColorUIMenuSettingsAllItem(uiMenuSettings);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 
 		CheckEnterPressedUIMenuTablePlayerResultItem(uiMenuSettings, game);

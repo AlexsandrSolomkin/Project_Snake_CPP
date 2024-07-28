@@ -16,6 +16,16 @@ namespace Snake
 		}
 	}
 
+	void CheckColorUIMenuDifficultyLevelAllItem(UIMenuDifficultyLevel& uiMenuDifficultyLevel)
+	{
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel1Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel1);
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel2Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel2);
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel3Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel3);
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel4Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel4);
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel5Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel5);
+		CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.backText, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsBack);
+	}
+
 	void CheckEnterPressedUIMenuDifficultyLevel(UIMenuDifficultyLevel& uiMenuDifficultyLevel, struct Game& game)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
@@ -51,16 +61,11 @@ namespace Snake
 				uiMenuDifficultyLevel.selectedDifficultyLevel = UIMenuDifficultyLevelEnum::IsLevel1;
 				uiMenuDifficultyLevel.selectedMenuDifficultyLevelItemPressed = 0;
 
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel1Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel1);
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel2Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel2);
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel3Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel3);
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel4Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel4);
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel5Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel5);
-				CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.backText, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsBack);
+				CheckColorUIMenuDifficultyLevelAllItem(uiMenuDifficultyLevel);
 			}
 
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -127,30 +132,20 @@ namespace Snake
 		{
 			uiMenuDifficultyLevel.selectedDifficultyLevel *= 2;
 
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel1Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel1);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel2Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel2);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel3Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel3);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel4Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel4);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel5Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel5);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.backText, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsBack);
+			CheckColorUIMenuDifficultyLevelAllItem(uiMenuDifficultyLevel);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 		else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 			(uiMenuDifficultyLevel.selectedDifficultyLevel != UIMenuDifficultyLevelEnum::IsLevel1))
 		{
 			uiMenuDifficultyLevel.selectedDifficultyLevel /= 2;
 
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel1Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel1);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel2Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel2);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel3Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel3);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel4Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel4);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.nameLevel5Text, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsLevel5);
-			CheckColorUIMenuDifficultyLevelItem(uiMenuDifficultyLevel.backText, uiMenuDifficultyLevel, UIMenuDifficultyLevelEnum::IsBack);
+			CheckColorUIMenuDifficultyLevelAllItem(uiMenuDifficultyLevel);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 
 		CheckEnterPressedUIMenuDifficultyLevel(uiMenuDifficultyLevel, game);

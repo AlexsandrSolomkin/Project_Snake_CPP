@@ -35,7 +35,6 @@ namespace Snake
 		
 		game.background.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
 		game.background.setFillColor(sf::Color::Black);
-		//game.background.setFillColor(sf::Color(0, 153, 76));
 		game.background.setPosition(0.0f, 0.0f);
 
 		InitUI(game.uiState, game.font);
@@ -125,30 +124,37 @@ namespace Snake
 			CheckCollisionWall(game);
 			CheckCollisionSnake(game);
 
-			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D)) &&
-				(game.snakeAll[0].typeTileSnake != TypeTileSnake::SnakeHeadDirectionLeft))
-			{
-				game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionRight;
-				game.snakeAll[0].sprite.setRotation(180.f);
-			}
-			else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
+			if (!(game.isPushButtonWASD)) {
+				if ((sf::Keyboard::isKeyPressed(sf::Keyboard::D)) &&
+					(game.snakeAll[0].typeTileSnake != TypeTileSnake::SnakeHeadDirectionLeft))
+				{
+					game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionRight;
+					game.snakeAll[0].sprite.setRotation(180.f);
+					game.isPushButtonWASD = true;
+				}
+				else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 					(game.snakeAll[0].typeTileSnake != TypeTileSnake::SnakeHeadDirectionDown))
-			{
-				game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionUp;
-				game.snakeAll[0].sprite.setRotation(90.f);
-			}
-			else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A)) &&
+				{
+					game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionUp;
+					game.snakeAll[0].sprite.setRotation(90.f);
+					game.isPushButtonWASD = true;
+				}
+				else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::A)) &&
 					(game.snakeAll[0].typeTileSnake != TypeTileSnake::SnakeHeadDirectionRight))
-			{
-				game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionLeft;
-				game.snakeAll[0].sprite.setRotation(0.f);
-			}
-			else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)) &&
+				{
+					game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionLeft;
+					game.snakeAll[0].sprite.setRotation(0.f);
+					game.isPushButtonWASD = true;
+				}
+				else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)) &&
 					(game.snakeAll[0].typeTileSnake != TypeTileSnake::SnakeHeadDirectionUp))
-			{
-				game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionDown;
-				game.snakeAll[0].sprite.setRotation(270.f);
+				{
+					game.snakeAll[0].typeTileSnake = TypeTileSnake::SnakeHeadDirectionDown;
+					game.snakeAll[0].sprite.setRotation(270.f);
+					game.isPushButtonWASD = true;
+				}
 			}
+			
 
 			game.gameFinishTime += deltaTime;
 

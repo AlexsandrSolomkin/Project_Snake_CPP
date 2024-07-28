@@ -39,20 +39,6 @@ namespace Snake
 
 	void CheckWhichTileShouldBetween(Game& game)
 	{
-		// Движение прямо вправо или влево
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		if ((game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[1].position2D.x) &&
 			(game.snakeAll[0].position2D.y == game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
 			||
@@ -62,21 +48,6 @@ namespace Snake
 			game.snakeAll[1].typeTileSnake = TypeTileSnake::SnakeBodyDirectionLeftRight;
 			game.snakeAll[1].sprite.setTexture(game.snakeBodyTexture);
 		}
-		//====================================================================================================================================
-		// Движение прямо вверх или вниз
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		else if ((game.snakeAll[0].position2D.y < game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x) &&
 				(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[2].position2D.x)
 				||
@@ -87,21 +58,6 @@ namespace Snake
 			game.snakeAll[1].sprite.setTexture(game.snakeBodyTexture);
 			game.snakeAll[1].sprite.setRotation(90.f);
 		}
-		//====================================================================================================================================
-		// Движение с поворотом (впараво -> вниз) или (вверх -> влево)
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		else if ((game.snakeAll[0].position2D.y > game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x) &&
 				(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
 				||
@@ -112,21 +68,6 @@ namespace Snake
 			game.snakeAll[1].sprite.setTexture(game.snakeTurnBodyTexture);
 			game.snakeAll[1].sprite.setRotation(90.f);
 		}
-		//====================================================================================================================================
-		// Движение с поворотом (вверх -> вправо) или (влево -> вниз)
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		else if ((game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[1].position2D.x) &&
 				(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
 				||
@@ -137,21 +78,6 @@ namespace Snake
 			game.snakeAll[1].sprite.setTexture(game.snakeTurnBodyTexture);
 			game.snakeAll[1].sprite.setRotation(0.f);
 		}
-		//====================================================================================================================================
-		// Движение с поворотом (вниз -> вправо) или (влево -> вверх)
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		else if ((game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[1].position2D.x) &&
 				(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
 				||
@@ -162,21 +88,6 @@ namespace Snake
 			game.snakeAll[1].sprite.setTexture(game.snakeTurnBodyTexture);
 			game.snakeAll[1].sprite.setRotation(270.f);
 		}
-		//====================================================================================================================================
-		// Движение с поворотом (вправо -> вверх) или (вниз -> влево)
-		//====================================================================================================================================
-		// (
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
-		// )
-		// ||
-		// (
-		//	(game.snakeAll[0].position2D.y == game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[1].position2D.x)
-		//	&&
-		//	(game.snakeAll[0].position2D.y > game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x < game.snakeAll[2].position2D.x)
-		// )
-		//====================================================================================================================================
 		else if ((game.snakeAll[0].position2D.y < game.snakeAll[1].position2D.y) && (game.snakeAll[0].position2D.x == game.snakeAll[1].position2D.x) &&
 				(game.snakeAll[0].position2D.y < game.snakeAll[2].position2D.y) && (game.snakeAll[0].position2D.x > game.snakeAll[2].position2D.x)
 				||
@@ -232,24 +143,28 @@ namespace Snake
 			{
 				game.snakeAll[0].position2D.x -= SNAKE_SIZE;
 				CheckWhichTileShouldBetween(game);
+				game.isPushButtonWASD = false;
 				break;
 			}
 			case TypeTileSnake::SnakeHeadDirectionUp:
 			{
 				game.snakeAll[0].position2D.y -= SNAKE_SIZE;
 				CheckWhichTileShouldBetween(game);
+				game.isPushButtonWASD = false;
 				break;
 			}
 			case TypeTileSnake::SnakeHeadDirectionRight:
 			{
 				game.snakeAll[0].position2D.x += SNAKE_SIZE;
 				CheckWhichTileShouldBetween(game);
+				game.isPushButtonWASD = false;
 				break;
 			}
 			case TypeTileSnake::SnakeHeadDirectionDown:
 			{
 				game.snakeAll[0].position2D.y += SNAKE_SIZE;
 				CheckWhichTileShouldBetween(game);
+				game.isPushButtonWASD = false;
 				break;
 			}
 		}

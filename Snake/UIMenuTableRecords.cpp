@@ -64,6 +64,12 @@ namespace Snake
 		}
 	}
 
+	void CheckColorUIMenuTablePlayerResultAllItem(UIMenuTablePlayerResult& uiMenuTablePlayerResult)
+	{
+		CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonPlayAgainText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsPlayAgain);
+		CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonMainMenuText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsMainMenu);
+	}
+
 	void CheckEnterPressedUIMenuTablePlayerResultItem(UIMenuTablePlayerResult& uiMenuTablePlayerResult, struct Game& game)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
@@ -89,7 +95,7 @@ namespace Snake
 			InitSnakeTile(game);
 
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -195,22 +201,20 @@ namespace Snake
 		{
 			uiMenuTablePlayerResult.selectedMenuTablePlayerResultItem *= 2;
 
-			CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonPlayAgainText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsPlayAgain);
-			CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonMainMenuText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsMainMenu);
+			CheckColorUIMenuTablePlayerResultAllItem(uiMenuTablePlayerResult);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 		else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 			(uiMenuTablePlayerResult.selectedMenuTablePlayerResultItem != UIMenuTableRecordsEnum::IsPlayAgain))
 		{
 			uiMenuTablePlayerResult.selectedMenuTablePlayerResultItem /= 2;
 
-			CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonPlayAgainText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsPlayAgain);
-			CheckColorUIMenuTablePlayerResultItem(uiMenuTablePlayerResult.buttonMainMenuText, uiMenuTablePlayerResult, UIMenuTableRecordsEnum::IsMainMenu);
+			CheckColorUIMenuTablePlayerResultAllItem(uiMenuTablePlayerResult);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 
 		CheckEnterPressedUIMenuTablePlayerResultItem(uiMenuTablePlayerResult, game);

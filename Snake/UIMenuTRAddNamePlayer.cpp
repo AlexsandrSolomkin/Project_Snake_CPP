@@ -17,49 +17,14 @@ namespace Snake
 		}
 	}
 
+	void CheckColorUIMenuTRAddNamePlayerAllItem(UIMenuTRAddNamePlayer& uiMenuTRAddNamePlayer)
+	{
+		CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddDefaultNameText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddDefaultName);
+		CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddNamePlayerText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddNamePlayer);
+	}
+
 	char AddChar()
 	{
-		/*
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)){ return (char)"A";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)){ return (char)"B";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)){ return (char)"C";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)){ return (char)"D";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)){ return (char)"E";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)){ return (char)"F";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)){ return (char)"G";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::H)){ return (char)"H";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)){ return (char)"I";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::J)){ return (char)"J";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::K)){ return (char)"K";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::L)){ return (char)"L";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)){ return (char)"M";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::N)){ return (char)"N";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::O)){ return (char)"O";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)){ return (char)"P";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){ return (char)"Q";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)){ return (char)"R";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)){ return (char)"S";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)){ return (char)"T";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::U)){ return (char)"U";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::V)){ return (char)"V";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)){ return (char)"W";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)){ return (char)"X";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)){ return (char)"Y";}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)){ return (char)"Z";}
-
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0)) { return 0; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) { return 1; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) { return 2; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) { return 3; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) { return 4; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) { return 5; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) { return 6; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) { return 7; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num8)) { return 8; }
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num9)) { return 9; }
-
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) { return (char)"_"; }
-		*/
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) { return 65; }
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::B)) { return 66; }
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) { return 67; }
@@ -129,7 +94,7 @@ namespace Snake
 			SerializeGame(game);
 			game.namePlayer = "XYZ";
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.2f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -149,7 +114,7 @@ namespace Snake
 			}
 
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.2f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -193,22 +158,20 @@ namespace Snake
 		{
 			uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItem *= 2;
 
-			CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddDefaultNameText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddDefaultName);
-			CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddNamePlayerText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddNamePlayer);
+			CheckColorUIMenuTRAddNamePlayerAllItem(uiMenuTRAddNamePlayer);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 		else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 			(uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItem != UIMenuTRAddNamePlayerEnum::IsAddDefaultName))
 		{
 			uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItem /= 2;
 
-			CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddDefaultNameText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddDefaultName);
-			CheckColorUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer.buttonAddNamePlayerText, uiMenuTRAddNamePlayer, UIMenuTRAddNamePlayerEnum::IsAddNamePlayer);
+			CheckColorUIMenuTRAddNamePlayerAllItem(uiMenuTRAddNamePlayer);
 
 			PlayInputMoveMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 
 		CheckEnterPressedUIMenuTRAddNamePlayerItem(uiMenuTRAddNamePlayer, game);

@@ -13,7 +13,6 @@ namespace Snake
 	
 	Position2D GetRandomPositionInScreen(const Game& game, int startX, int endX, int startY, int endY)
 	{
-		//Position2D result = game.mapTiles[rand() % (endX - startX + 1) * startX][rand() % (endY - startY + 1) * startY].position2D;
 		Position2D result = game.mapTiles[rand() % (endX - startX + 1) + startX][rand() % (endY - startY + 1) + startY].position2D;
 		return result;
 	}

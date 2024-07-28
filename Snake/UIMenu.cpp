@@ -16,6 +16,15 @@ namespace Snake
 		}
 	}
 
+	void CheckColorUIMenuAllItem(UIMenu& uiMenu)
+	{
+		CheckColorUIMenuItem(uiMenu.startGameText, uiMenu, UIMenuEnum::IsGameStart);
+		CheckColorUIMenuItem(uiMenu.difficultyLevelGameText, uiMenu, UIMenuEnum::IsGameDifficultyLevel);
+		CheckColorUIMenuItem(uiMenu.tableRecordsText, uiMenu, UIMenuEnum::IsGameTableRecords);
+		CheckColorUIMenuItem(uiMenu.settingsText, uiMenu, UIMenuEnum::IsGameSettings);
+		CheckColorUIMenuItem(uiMenu.exitText, uiMenu, UIMenuEnum::IsGameExit);
+	}
+
 	void CheckEnterPressedUIMenu(UIMenu& uiMenu, struct Game& game)
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
@@ -43,7 +52,7 @@ namespace Snake
 			}
 
 			PlayInputEnterMenuSound(game);
-			sf::sleep(sf::seconds(0.1f));
+			sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 		}
 	}
 
@@ -103,6 +112,7 @@ namespace Snake
 
 	void UpdateUIMenu(UIMenu& uiMenu, struct Game& game)
 	{
+		//√À¿¬ÕŒ≈ Ã≈Õﬁ
 		if (!(game.uiMenu.selectedMenuItemPressed))
 		{
 			if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)) &&
@@ -110,68 +120,60 @@ namespace Snake
 			{
 				game.uiMenu.selectedMenuItem *= 2;
 
-				CheckColorUIMenuItem(uiMenu.startGameText, uiMenu, UIMenuEnum::IsGameStart);
-				CheckColorUIMenuItem(uiMenu.difficultyLevelGameText, uiMenu, UIMenuEnum::IsGameDifficultyLevel);
-				CheckColorUIMenuItem(uiMenu.tableRecordsText, uiMenu, UIMenuEnum::IsGameTableRecords);
-				CheckColorUIMenuItem(uiMenu.settingsText, uiMenu, UIMenuEnum::IsGameSettings);
-				CheckColorUIMenuItem(uiMenu.exitText, uiMenu, UIMenuEnum::IsGameExit);
+				CheckColorUIMenuAllItem(uiMenu);
 
 				PlayInputMoveMenuSound(game);
-				sf::sleep(sf::seconds(0.1f));
+				sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 			}
 			else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)) &&
 				(game.uiMenu.selectedMenuItem != UIMenuEnum::IsGameStart))
 			{
 				game.uiMenu.selectedMenuItem /= 2;
 
-				CheckColorUIMenuItem(uiMenu.startGameText, uiMenu, UIMenuEnum::IsGameStart);
-				CheckColorUIMenuItem(uiMenu.difficultyLevelGameText, uiMenu, UIMenuEnum::IsGameDifficultyLevel);
-				CheckColorUIMenuItem(uiMenu.tableRecordsText, uiMenu, UIMenuEnum::IsGameTableRecords);
-				CheckColorUIMenuItem(uiMenu.settingsText, uiMenu, UIMenuEnum::IsGameSettings);
-				CheckColorUIMenuItem(uiMenu.exitText, uiMenu, UIMenuEnum::IsGameExit);
-
+				CheckColorUIMenuAllItem(uiMenu);
+				
 				PlayInputMoveMenuSound(game);
-				sf::sleep(sf::seconds(0.1f));
+				sf::sleep(sf::seconds(STEP_TIME_ACTIVATE_BUTTON));
 			}
 
 			CheckEnterPressedUIMenu(uiMenu, game);
 		}
+		//¬€¡Œ– ”–Œ¬Õﬂ —ÀŒ∆ÕŒ—“»
 		else if (game.uiMenu.selectedMenuItemPressed == UIMenuPressedEnum::IsGameDifficultyLevelPressed)
 		{
 			UpdateUIMenuDifficultyLevel(game.uiMenu.uiMenuDifficultyLevel, game);
 		}
+		//Õ¿—“–Œ… »
 		else if (game.uiMenu.selectedMenuItemPressed == UIMenuPressedEnum::IsGameSettingsPressed)
 		{
 			UpdateUIMenuSettings(game.uiMenu.uiMenuSettings, game);
 		}
-		else if ((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsAddNamePlayerPressed) &&
-				!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
-		{
-			AddCharNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, game);
-		}
-		else if ((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0) &&
-				!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
-		{
-			UpdateUIMenuTRAddNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, game);
-		}
-		else if ((((game.isGameFinished) && 
-				(game.uiMenu.selectedMenuItemPressed & UIMenuPressedEnum::IsGameStartPressed)) &&
-				!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0))
+		//Ã≈Õﬁ “¿¡À»÷€ –≈ Œ–ƒŒ¬ ¬  ŒÕ÷≈ »√–€
+		else if ((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName)
 				||
 				(game.uiMenu.selectedMenuItemPressed & UIMenuPressedEnum::IsGameTableRecordsPressed))
 		{
 			UpdateUIMenuTableRecords(game.uiMenu.uiMenuTablePlayerResult, game);
 
-			CheckColorUIMenuItem(uiMenu.startGameText, uiMenu, UIMenuEnum::IsGameStart);
-			CheckColorUIMenuItem(uiMenu.difficultyLevelGameText, uiMenu, UIMenuEnum::IsGameDifficultyLevel);
-			CheckColorUIMenuItem(uiMenu.tableRecordsText, uiMenu, UIMenuEnum::IsGameTableRecords);
-			CheckColorUIMenuItem(uiMenu.settingsText, uiMenu, UIMenuEnum::IsGameSettings);
-			CheckColorUIMenuItem(uiMenu.exitText, uiMenu, UIMenuEnum::IsGameExit);
+			CheckColorUIMenuAllItem(uiMenu);
+		}
+		//Ã≈Õﬁ ƒŒ¡¿¬À≈Õ»ﬂ »Ã≈Õ» ¬ “¿¡À»÷” –≈ Œ–ƒŒ¬
+		else if ((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsAddNamePlayerPressed) &&
+			!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
+		{
+			AddCharNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, game);
+		}
+		//Ã≈Õﬁ ƒŒ¡¿¬À≈Õ»ﬂ »Ã≈Õ» ¬ “¿¡À»÷” –≈ Œ–ƒŒ¬
+		else if ((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0) &&
+			!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
+		{
+			UpdateUIMenuTRAddNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, game);
 		}
 	}
 
 	void DrawUIMenu(UIMenu& uiMenu, struct Game& game, sf::RenderWindow& window)
 	{
+		//√À¿¬ÕŒ≈ Ã≈Õﬁ
 		if (!uiMenu.selectedMenuItemPressed)
 		{
 			window.draw(uiMenu.nameGameText);
@@ -181,32 +183,35 @@ namespace Snake
 			window.draw(uiMenu.settingsText);
 			window.draw(uiMenu.exitText);
 		}
+		//¬€¡Œ– ”–Œ¬Õﬂ —ÀŒ∆ÕŒ—“»
 		else if (uiMenu.selectedMenuItemPressed == UIMenuPressedEnum::IsGameDifficultyLevelPressed)
 		{
 			DrawUIMenuDifficultyLevel(uiMenu.uiMenuDifficultyLevel, window);
 		}
+		//“¿¡À»÷¿ –≈ Œ–ƒŒ¬
 		else if (uiMenu.selectedMenuItemPressed == UIMenuPressedEnum::IsGameTableRecordsPressed)
 		{
 			DrawTablePlayerResult(uiMenu.uiMenuTablePlayerResult, window);
 		}
+		//Õ¿—“–Œ… »
 		else if (game.uiMenu.selectedMenuItemPressed == UIMenuPressedEnum::IsGameSettingsPressed)
 		{
 			DrawUIMenuSettings(game.uiMenu.uiMenuSettings, window);
 		}
-		else if (((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0) &&
-			!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
-			||
-			(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsAddNamePlayerPressed))
-		{
-			DrawUIMenuTRAddNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, window);
-			DrawUI(game.uiState, window);
-		}
-		else if (((uiMenu.selectedMenuItemPressed & UIMenuPressedEnum::IsGameStartPressed) &&
-				(game.isGameFinished) && !(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0))
-				||
-				(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
+		//Ã≈Õﬁ “¿¡À»÷€ –≈ Œ–ƒŒ¬ ¬  ŒÕ÷≈ »√–€
+		else if (game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName)
 		{
 			DrawEndGameInfo(uiMenu.uiMenuTablePlayerResult, window);
+			DrawUI(game.uiState, window);
+		}
+		//Ã≈Õﬁ ƒŒ¡¿¬À≈Õ»ﬂ »Ã≈Õ» ¬ “¿¡À»÷” –≈ Œ–ƒŒ¬
+		else if (!(game.uiMenu.selectedMenuItemPressed & UIMenuPressedEnum::IsGameExitPressed) && 
+			(((game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed == 0) &&
+			!(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsSavePlayerName))
+			||
+			(game.uiMenu.uiMenuTRAddNamePlayer.selectedMenuTRAddNamePlayerItemPressed & UIMenuTRAddNamePlayerPressedEnum::IsAddNamePlayerPressed)))
+		{
+			DrawUIMenuTRAddNamePlayer(game.uiMenu.uiMenuTRAddNamePlayer, window);
 			DrawUI(game.uiState, window);
 		}
 	}
